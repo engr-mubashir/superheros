@@ -12,23 +12,26 @@ export class SuperherosService {
     private superheroModel: Model<SuperheroDocument>,
   ) {}
 
-  create(createSuperheroDto: CreateSuperheroDto) {
-    return 'This action adds a new superhero';
+  async create(createSuperheroDto: CreateSuperheroDto) {
+    const superhero = new this.superheroModel(createSuperheroDto);
+    return await superhero.save();
   }
 
-  findAll() {
-    return `This action returns all superheros`;
+  async findAll() {
+    return await this.superheroModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} superhero`;
+  async findOne(id: string) {
+    return await this.superheroModel.findOne({ id }).exec();
   }
 
-  update(id: number, updateSuperheroDto: UpdateSuperheroDto) {
-    return `This action updates a #${id} superhero`;
+  async update(id: string, updateSuperheroDto: UpdateSuperheroDto) {
+    return await this.superheroModel
+      .updateOne({ id }, updateSuperheroDto)
+      .exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} superhero`;
+  async remove(id: string) {
+    return await this.superheroModel.remove({ id }).exec();
   }
 }
