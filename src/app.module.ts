@@ -10,7 +10,13 @@ import { SuperherosModule } from './superheros/superheros.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri:
+          'mongodb://' +
+          configService.get<string>('MONGO_SERVER') +
+          ':' +
+          configService.get<string>('MONGO_PORT') +
+          '/' +
+          configService.get<string>('MONGO_DB'),
       }),
       inject: [ConfigService],
     }),

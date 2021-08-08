@@ -22,16 +22,16 @@ export class SuperherosService {
   }
 
   async findOne(id: string) {
-    return await this.superheroModel.findOne({ id }).exec();
+    return await this.superheroModel.findOne({ _id: id }).exec();
   }
 
   async update(id: string, updateSuperheroDto: UpdateSuperheroDto) {
     return await this.superheroModel
-      .updateOne({ id }, updateSuperheroDto)
+      .updateOne({ _id: id }, updateSuperheroDto)
       .exec();
   }
 
   async remove(id: string) {
-    return await this.superheroModel.remove({ id }).exec();
+    return await this.superheroModel.remove({ _id: id }).exec();
   }
 }

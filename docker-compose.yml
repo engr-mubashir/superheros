@@ -1,14 +1,16 @@
 version: '3.8'
 services:
-  dev:
-    container_name: superheros_dev
-    image: superheros-dev:1.0.0
+  superheros_backend:
+    container_name: superheros_backend
+    image: superheros_backend:1.0.0
     build:
       context: .
       dockerfile: ./Dockerfile
-      command: npm run start:dev
+    command: npm run start:dev
+    env_file:
+      - .env.dist
     ports:
-      - 3000:3000
+      - ${PORT}:${PORT}
       - 3001:9229
     networks:
       - nesjs-network
@@ -24,28 +26,10 @@ services:
     volumes:
       - ./database:/data/db
     ports:
-      - 27017:27017
+      - ${MONGO_PORT}:${MONGO_PORT}
     networks:
       - nesjs-network
     restart: always
-  prod:
-    container_name: superheros_prod
-    image: superheros-prod:1.0.0
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    command: npm run start:prod
-    ports:
-      - 3000:3000
-      - 9229:9229
-    networks:
-      - nesjs-network
-    depends_on:
-      - mongodb
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    restart: unless-stopped
 networks:
     nesjs-network:
       driver: bridge
