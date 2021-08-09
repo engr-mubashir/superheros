@@ -14,7 +14,7 @@ export class SuperherosService {
 
   async create(createSuperheroDto: CreateSuperheroDto) {
     const superhero = new this.superheroModel(createSuperheroDto);
-    return await superhero.save();
+    return await this.superheroModel.create(superhero);
   }
 
   async findAll() {

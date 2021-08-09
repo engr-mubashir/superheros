@@ -1,7 +1,3 @@
-# API Docs
-
-- [API Docs](https://localhost:3000)
-
 # Installation - Docker
 ```bash
 # start docker-compose
@@ -46,3 +42,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+# API Docs
+After running the app, the API Docs would be available at
+- [API Docs](https://localhost:3000)
